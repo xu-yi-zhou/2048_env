@@ -154,8 +154,8 @@ class Game2048Env(gym.Env):   # directions 0, 1, 2, 3 are up, right, down, left
     # Implement 2048 game
     def add_tile(self):
         """Add a tile, probably a 2 but maybe a 4"""
-        possible_tiles = np.array([2, 4])
-        tile_probabilities = np.array([0.9, 0.1])
+        possible_tiles = np.array([2, 3, 4])
+        tile_probabilities = np.array([0.885, 0.015, 0.1])
         val = self.np_random.choice(possible_tiles, 1, p=tile_probabilities)[0]
         empties = self.empties()
         assert empties.shape[0]
@@ -245,6 +245,11 @@ class Game2048Env(gym.Env):   # directions 0, 1, 2, 3 are up, right, down, left
             combined_row[output_index] = p[0]
             if p[0] == p[1]:
                 combined_row[output_index] += p[1]
+                if combined_row[output_index] == 12:
+                    possible_tiles = np.array([2, 4])
+                    tile_probabilities = np.array([0.9, 0.1])
+                    val = self.np_random.choice(possible_tiles, 1, p=tile_probabilities)[0]
+                    combined_row[output_index] = val
                 move_score += p[0] + p[1]
                 # Skip the next thing in the list.
                 skip = True

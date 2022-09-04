@@ -8,7 +8,7 @@ from utils import log2_shaping, Perfomance_Saver, Model_Saver
 
 
 train_episodes = 20000
-test_episodes = 50
+test_episodes = 100
 ifrender = False
 eval_interval = 25
 epsilon_decay_interval = 100
@@ -141,5 +141,5 @@ def test(episodes=20, agent=None, load_path=None, ifrender=False, log=False):
 
 
 if __name__ == "__main__":
-    # test(episodes=test_episodes, ifrender=ifrender)
-    train()
+    test(episodes=test_episodes, ifrender=ifrender, load_path='./save/')
+    # train()
